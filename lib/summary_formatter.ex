@@ -4,7 +4,6 @@ defmodule SummaryFormatter do
 
   alias ExUnit.Test
   alias SummaryFormatter.Server
-  require IEx
   use GenServer
 
   ## Callbacks
@@ -27,14 +26,18 @@ defmodule SummaryFormatter do
     {:ok, config}
   end
 
-  def handle_cast({:test_finished, %Test{state: {:failed, _}} = test}, state) do
+  def handle_cast({:test_finished, %Test{state: {:failed, _}} = test} = event, state) do
+    ExUnit.CLIFormatter.handle_cast(event, state)
     new_failed_tests = state.failed_tests ++ [test]
     new_state = %{state | failed_tests: new_failed_tests}
     {:noreply, new_state}
   end
 
-  def handle_cast({:suite_finished, _, _}, state) do
-    Server.add_tests(state.failed_tests)
+  def handle_cast({:suite_finished, _, _}, %{failed_tests: []} = state) do
+    {:noreply, state}
+  end
+  def handle_cast({:suite_finished, _, _}, %{failed_tests: failed_tests} = state) do
+    Server.add_tests(failed_tests)
     {:noreply, state}
   end
 

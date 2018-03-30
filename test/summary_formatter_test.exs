@@ -1,8 +1,11 @@
 defmodule SummaryFormatterTest do
   use ExUnit.Case
-  doctest SummaryFormatter
 
-  test "greets the world" do
-    assert SummaryFormatter.hello() == :world
+  test "works" do
+    assert false
+  end
+
+  test "works 2" do
+    assert false
   end
 end
