@@ -7,6 +7,8 @@ defmodule SummaryFormatter.Mixfile do
       version: "0.1.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
+      description: description(),
+      package: package(),
       deps: []
     ]
   end
@@ -26,7 +28,7 @@ defmodule SummaryFormatter.Mixfile do
   def package() do
     github_link = "https://github.com/danielzendejas/summary_formatter"
     [
-      files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
       licenses: ["Apache 2.0"],
       links: %{"GitHub" => github_link},
       maintainers: ["Daniel Zendejas"],
