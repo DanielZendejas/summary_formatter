@@ -9,7 +9,9 @@ defmodule SummaryFormatter.Mixfile do
       start_permanent: Mix.env == :prod,
       description: description(),
       package: package(),
-      deps: []
+      deps: [
+        {:ex_doc, ">= 0.0.0", only: :dev}
+      ]
     ]
   end
 
